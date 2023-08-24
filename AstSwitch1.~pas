@@ -1,6 +1,6 @@
 {------------------------------------------------------------------------------}
 {         written by Victor Borodinov, borodinov.v@gmail.com                   }
-{         AstSwitch component for VCL - animated toggle switches               }
+{         AstSwitch component for VCL - animated toggle switch                 }
 {         Borland Delphi (32-bit)                                              }
 {------------------------------------------------------------------------------}
 unit AstSwitch1;
@@ -11,7 +11,9 @@ uses
   SysUtils, Classes, Controls, ExtCtrls, messages, Graphics, Forms, StdCtrls;
 
 type
+
   TAstSwitchEvent=procedure(Sender: TObject) of object;
+
 
   TAstSwitch = class;
   TKind = (asHorizontal, asVertical);
@@ -51,6 +53,7 @@ type
     property LabelOffFontColor: TColor read FLabelOffFontColor write SetLabelOffFontColor;
     property LabelOnFontColor: TColor read FLabelOnFontColor write SetLabelOnFontColor;
     property LabelFont: TFont read FLabelFont write SetLabelFont;
+
   end;
 
 
@@ -73,6 +76,7 @@ type
 
     FAnimationDelay: Integer;
     FAnimationStep: Integer;
+
     FKind: TKind;
 
 
@@ -84,6 +88,7 @@ type
     procedure MouseDown(Sender: TObject;
               Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 
+
     function  GetSwitchStatus: Boolean;
     procedure SetSwitchStatus(const Value: Boolean);
 
@@ -94,6 +99,7 @@ type
     procedure SetAnimationStep(const Value: Integer);
 
     procedure SetKind(const Value: TKind);
+
     procedure repaintProc;
 
   protected
@@ -108,12 +114,20 @@ type
 //    property ParentColor;
 //    property Color;
     property BevelOuter;
+
+
     property Kind: TKind read FKind write SetKind;
+
     property AstSwitchColors: TColorProperties read FAstSwitchColors write SetAstSwitchColors;
+
     property Switch_On: Boolean read GetSwitchStatus write SetSwitchStatus;
+
     property AnimationDelay: Integer read GetAnimationDelay write SetAnimationDelay;
     property AnimationStep: Integer read GetAnimationStep write SetAnimationStep;
+
     property Change: TAstSwitchEvent read FChange write FChange;
+
+
   end;
 
 procedure Register;
@@ -132,6 +146,7 @@ begin
   inherited Create;
 
   FAstSwitch := AstSwitch;
+
   FBottomBaseColor := clGray;
   FBaseColor := clWhite;
   FSwitchColor := clNavy;
@@ -139,7 +154,10 @@ begin
   FLabelOnFontColor := clBlack;
   FLabelFont:= TFont.Create;
   FLabelFont.Name:='Arial';
+
   FLabelFont.OnChange := LabelFontChanged;
+
+
 end;
 
 
@@ -162,34 +180,36 @@ begin
 end;
 
 
+
 procedure TColorProperties.SetBottomBaseColor(Value: TColor);
 begin
   if Value <> FBottomBaseColor then
-     begin
-     FBottomBaseColor := Value;
-     FAstSwitch.Invalidate;
-     FAstSwitch.repaintProc;
-    end;
+  begin
+    FBottomBaseColor := Value;
+    FAstSwitch.Invalidate;
+    FAstSwitch.repaintProc;
+  end;
 end;
 
 procedure TColorProperties.SetBaseColor(Value: TColor);
 begin
   if Value <> FBaseColor then
-     begin
-     FBaseColor := Value;
-     FAstSwitch.Invalidate;
-     FAstSwitch.repaintProc;
-     end;
+  begin
+    FBaseColor := Value;
+    FAstSwitch.Invalidate;
+    FAstSwitch.repaintProc;
+  end;
 end;
 
 procedure TColorProperties.SetSwitchColor(Value: TColor);
 begin
   if Value <> FSwitchColor then
-     begin
-     FSwitchColor := Value;
-     FAstSwitch.Invalidate;
-     FAstSwitch.repaintProc;
-     end;
+  begin
+    FSwitchColor := Value;
+    FAstSwitch.Invalidate;
+    FAstSwitch.repaintProc;
+
+  end;
 end;
 
 
@@ -209,7 +229,7 @@ end;
 
 procedure TColorProperties.SetLabelFont(Value: TFont);
 begin
-  FLabelFont.Assign(Value);
+   FLabelFont.Assign(Value);
 end;
 
 
@@ -218,6 +238,8 @@ begin
   FAstSwitch.Invalidate;
   FAstSwitch.repaintProc;
 end;
+
+
 
 
 {TAstSwitch}
@@ -231,9 +253,11 @@ begin
 
   //initial
   Caption:='.';
+
   ParentColor:=True;
   Self.BevelInner:=bvNone;
   Self.BevelOuter:=bvNone;
+
   FSwitchOn:=True;
 
   Width:=32;
@@ -241,6 +265,7 @@ begin
 
   FAnimationDelay:=5;
   FAnimationStep:=2;
+
   FKind:=asVertical;
 
   FBottomBaseShape:=TShape.Create(Self);
@@ -307,10 +332,13 @@ begin
 end;
 
 
+
+
 procedure TAstSwitch.SetAstSwitchColors(Value: TColorProperties);
 begin
   FAstSwitchColors.Assign(Value);
 end;
+
 
 
 procedure TAstSwitch.SetKind(const Value: TKind);
@@ -318,6 +346,7 @@ begin
    FKind:=Value;
    repaintProc;
 end;
+
 
 
 procedure TAstSwitch.repaintProc;
@@ -340,6 +369,7 @@ begin
 
   if FKind=asVertical then
      begin
+
      FSwitchShape.Left:=FBottomBaseShape.Left+1;
      FSwitchShape.Width:=FBottomBaseShape.Width - 2; //  1| |1
      FSwitchShape.Height:=FBottomBaseShape.Height div 2;
@@ -417,37 +447,37 @@ begin
         FSwitchOn:=False;
       end;
 end;
-
 procedure HorizontalInition;
 begin
    if value=True then
       begin
-      FSwitchShape.Top:=FBottomBaseShape.Top;
-      FSwitchShape.Left:=FBottomBaseShape.Left + FBottomBaseShape.Width - FSwitchShape.width;
+        FSwitchShape.Top:=FBottomBaseShape.Top;
+        FSwitchShape.Left:=FBottomBaseShape.Left + FBottomBaseShape.Width - FSwitchShape.width;
 
-      FSwitchOffLAbel.Visible:=False;
-      FSwitchOnLAbel.Visible:=True;
+        FSwitchOffLAbel.Visible:=False;
+        FSwitchOnLAbel.Visible:=True;
 
-      FSwitchOn:=True;
+        FSwitchOn:=True;
       end
    else
       begin
-      FSwitchShape.Top:=FBottomBaseShape.Top;
-      FSwitchShape.Left:=FBottomBaseShape.Left;
+        FSwitchShape.Top:=FBottomBaseShape.Top;
+        FSwitchShape.Left:=FBottomBaseShape.Left;
 
-      FSwitchOffLAbel.Visible:=True;
-      FSwitchOnLAbel.Visible:=False;
+        FSwitchOffLAbel.Visible:=True;
+        FSwitchOnLAbel.Visible:=False;
 
-      FSwitchOn:=False;
+        FSwitchOn:=False;
       end;
 end;
 
 begin
-   if FKind=asVertical then
-      verticalInition
-   else
-      horizontalInition;
+ if FKind=asVertical then
+    verticalInition
+ else
+    horizontalInition;
 end;
+
 
 
 function TAstSwitch.GetAnimationDelay: Integer;
@@ -468,14 +498,14 @@ end;
 
 procedure TAstSwitch.SetAnimationStep(const Value: Integer);
 begin
-   FAnimationStep:=Value;
+  FAnimationStep:=Value;
 end;
 
 
 procedure TAstSwitch.WMSize(var Message: TMessage);
 begin
-   inherited;
-   repaintProc;
+  inherited;
+  repaintProc;
 end;
 
 
@@ -483,89 +513,96 @@ procedure TAstSwitch.MouseDown(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 
 procedure verticalAnimation;
-begin
-   if FSwitchOn=True then
-      begin
-      while FSwitchShape.Top+FSwitchShape.Height < FBaseShape.Top+FBaseShape.Height do
-            begin
-            FSwitchShape.Top:=FSwitchShape.Top + FAnimationStep;
-            sleep(FAnimationDelay);
-            Application.ProcessMessages;
-            end;
+  begin
+     if FSwitchOn=True then
+        begin
+        while FSwitchShape.Top+FSwitchShape.Height < FBaseShape.Top+FBaseShape.Height do
+              begin
+              FSwitchShape.Top:=FSwitchShape.Top + FAnimationStep;
+              sleep(FAnimationDelay);
+              Application.ProcessMessages;
+              end;
 
-      FSwitchShape.Top:=FBaseShape.Top + FBaseShape.Height - FSwitchShape.Height;
+        FSwitchShape.Top:=FBaseShape.Top + FBaseShape.Height - FSwitchShape.Height;
 
-      FSwitchOffLAbel.Visible:=True;
-      FSwitchOnLAbel.Visible:=False;
+        FSwitchOffLAbel.Visible:=True;
+        FSwitchOnLAbel.Visible:=False;
 
-      FSwitchOn:=False;
-      end
-   else
-      begin
+        FSwitchOn:=False;
 
-      while FSwitchShape.Top > FBaseShape.Top do
-            begin
-            FSwitchShape.Top:=FSwitchShape.Top - FAnimationStep;
-            sleep(FAnimationDelay);
-            Application.ProcessMessages;
-            end;
+        end
+     else
+        begin
 
-      FSwitchShape.Top := FBaseShape.Top;
+        while FSwitchShape.Top > FBaseShape.Top do
+              begin
+              FSwitchShape.Top:=FSwitchShape.Top - FAnimationStep;
+              sleep(FAnimationDelay);
+              Application.ProcessMessages;
+              end;
 
-      FSwitchOffLAbel.Visible:=False;
-      FSwitchOnLAbel.Visible:=True;
+        FSwitchShape.Top := FBaseShape.Top;
 
-      FSwitchOn:=True;
-      end;
+        FSwitchOffLAbel.Visible:=False;
+        FSwitchOnLAbel.Visible:=True;
+
+        FSwitchOn:=True;
+
+        end;
   end;
 
 procedure horizontalAnimation;
+  begin
+     FSwitchShape.Top:=FBottomBaseShape.Top + 1;
+
+     if FSwitchOn=True then
+        begin
+        while FSwitchShape.Left + FSwitchShape.Width < FBottomBaseShape.Left+FBottomBaseShape.Width do
+              begin
+              FSwitchShape.Left:=FSwitchShape.Left + FAnimationStep;
+              sleep(FAnimationDelay);
+              Application.ProcessMessages;
+              end;
+
+        FSwitchShape.Left := FBaseShape.Left + FBaseShape.Width - FSwitchShape.Width;
+
+        FSwitchOffLAbel.Visible:=False;
+        FSwitchOnLAbel.Visible:=True;
+
+        FSwitchOn:=False;
+
+        end
+     else
+        begin
+
+        while FSwitchShape.Left > FBottomBaseShape.Left do
+              begin
+              FSwitchShape.Left:=FSwitchShape.Left - FAnimationStep;
+              sleep(FAnimationDelay);
+              Application.ProcessMessages;
+              end;
+
+        FSwitchShape.Left := FBaseShape.Left;
+
+        FSwitchOffLAbel.Visible:=True;
+        FSwitchOnLAbel.Visible:=False;
+
+        FSwitchOn:=True;
+
+        end;
+  end;
+
+
 begin
-   FSwitchShape.Top:=FBottomBaseShape.Top + 1;
 
-   if FSwitchOn=True then
-      begin
-      while FSwitchShape.Left + FSwitchShape.Width < FBottomBaseShape.Left+FBottomBaseShape.Width do
-            begin
-            FSwitchShape.Left:=FSwitchShape.Left + FAnimationStep;
-            sleep(FAnimationDelay);
-            Application.ProcessMessages;
-            end;
+  if FKind=asVertical then
+     verticalAnimation
+  else
+     horizontalAnimation;
 
-      FSwitchShape.Left := FBaseShape.Left + FBaseShape.Width - FSwitchShape.Width;
+  if Assigned(FChange) then FChange(Self);
 
-      FSwitchOffLAbel.Visible:=False;
-      FSwitchOnLAbel.Visible:=True;
 
-      FSwitchOn:=False;
-
-      end
-   else
-      begin
-      while FSwitchShape.Left > FBottomBaseShape.Left do
-            begin
-            FSwitchShape.Left:=FSwitchShape.Left - FAnimationStep;
-            sleep(FAnimationDelay);
-            Application.ProcessMessages;
-            end;
-
-      FSwitchShape.Left := FBaseShape.Left;
-
-      FSwitchOffLAbel.Visible:=True;
-      FSwitchOnLAbel.Visible:=False;
-
-      FSwitchOn:=True;
-      end;
-   end;
-
-begin //main TAstSwitch.MouseDown
-
-   if FKind=asVertical then
-      verticalAnimation
-   else
-      horizontalAnimation;
-
-   if Assigned(FChange) then FChange(Self);
 end;
 
 
