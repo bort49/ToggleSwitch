@@ -222,8 +222,6 @@ end;
 
 {TAstSwitch}
 constructor TAstSwitch.Create(AOwner: TComponent);
-var
-  i: Integer;
 begin
   inherited Create(AOwner);
 
